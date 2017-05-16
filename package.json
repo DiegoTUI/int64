@@ -4,7 +4,7 @@
     "scripts": {
     },
     "dependencies": {
-        "async": "^2.4.0",
+        "asyncawait": "^1.0.6",
         "bignumber.js": "^4.0.2",
         "gonode": "^0.1.2"
     }
