@@ -1,0 +1,11 @@
+{
+    "name": "int64",
+    "version": "0.0.1",
+    "scripts": {
+    },
+    "dependencies": {
+        "async": "^2.4.0",
+        "bignumber.js": "^4.0.2",
+        "gonode": "^0.1.2"
+    }
+}
