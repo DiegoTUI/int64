@@ -17,24 +17,31 @@ const n6Int64 = new Int64(numbers.number6, 10);
 const n7Int64 = new Int64(numbers.number7, 10);
 
 let waspInstance;
-let waspInstanceMemoryUint32;
+const waspInstanceMemoryUint32 = new Uint32Array(memory.buffer);
 
-const performSumOperation = (n1Int64, n2Int64, expected) => {
-    waspInstanceMemoryUint32[0] = n1Int64.toBuffer().readUInt32LE(0);
-    waspInstanceMemoryUint32[1] = n1Int64.toBuffer().readUInt32LE(4);
-    waspInstanceMemoryUint32[2] = n2Int64.toBuffer().readUInt32LE(0);
-    waspInstanceMemoryUint32[3] = n2Int64.toBuffer().readUInt32LE(4);
+const performSumOperation = (n1, n2, expected) => {
+    waspInstanceMemoryUint32[0] = n1.toBuffer().readUInt32LE(0);
+    waspInstanceMemoryUint32[1] = n1.toBuffer().readUInt32LE(4);
+    waspInstanceMemoryUint32[2] = n2.toBuffer().readUInt32LE(0);
+    waspInstanceMemoryUint32[3] = n2.toBuffer().readUInt32LE(4);
     waspInstance.exports.addTwo();
     assert.equal(new Int64(waspInstanceMemoryUint32.buffer, 16).toString(), expected,
-                            'Failed sum operation - ' + n1Int64.toString() + '-' +
-                                                        n1Int64.toString() + '-' +
+                            'Failed sum operation - ' + n1.toString() + '-' +
+                                                        n2.toString() + '-' +
                                                         expected);
 }
     
 
 const performDivOperation = (n1, n2, expected) => {
-    expectedResult = expected;
-    return client.write(n1 + '|' + n2 + '|div');
+    waspInstanceMemoryUint32[0] = n1.toBuffer().readUInt32LE(0);
+    waspInstanceMemoryUint32[1] = n1.toBuffer().readUInt32LE(4);
+    waspInstanceMemoryUint32[2] = n2.toBuffer().readUInt32LE(0);
+    waspInstanceMemoryUint32[3] = n2.toBuffer().readUInt32LE(4);
+    waspInstance.exports.divTwo();
+    assert.equal(new Int64(waspInstanceMemoryUint32.buffer, 16).toString(), expected,
+                            'Failed div operation - ' + n1.toString() + '-' +
+                                                        n2.toString() + '-' +
+                                                        expected);
 }
 
 WebAssembly.compile(new Uint8Array(buf))
@@ -54,15 +61,18 @@ WebAssembly.compile(new Uint8Array(buf))
     })
     .then(instance => {
         waspInstance = instance;
-        const n1 = '1223372036854775808';
-        const n2 = '1523372036854775808';
-        const n1Int64 = new Int64(n1, 10);
-        const n2Int64 = new Int64(n2, 10);
-        waspInstanceMemoryUint32 = new Uint32Array(memory.buffer);
 
+        console.time('testWasp');
         for (let i = 0; i < 100000; i++) {
             performSumOperation(n1Int64, n2Int64, numbers.number1plus2);
+            performSumOperation(n1Int64, n3Int64, numbers.number1plus3);
+            performSumOperation(n1Int64, n4Int64, numbers.number1plus4);
+
+            performDivOperation(n1Int64, n5Int64, numbers.number1div5);
+            performDivOperation(n1Int64, n6Int64, numbers.number1div6);
+            performDivOperation(n1Int64, n7Int64, numbers.number1div7);
         }
+        console.timeEnd('testWasp');
 
         process.exit(0);
     })
