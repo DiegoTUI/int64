@@ -6,6 +6,7 @@
     "dependencies": {
         "asyncawait": "^1.0.6",
         "bignumber.js": "^4.0.2",
-        "gonode": "^0.1.2"
+        "gonode": "^0.1.2",
+        "int64-buffer": "^0.1.9"
     }
 }
