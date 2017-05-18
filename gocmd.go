@@ -15,7 +15,7 @@ func main() {
 
 	switch *op {
 	case "div":
-		fmt.Print(strconv.FormatFloat(float64(*n1)/float64(*n2), 'f', -1, 64))
+		fmt.Print(strconv.FormatInt((*n1)/(*n2), 10))
 	default:
 		fmt.Print(strconv.FormatInt((*n1)+(*n2), 10))
 	}

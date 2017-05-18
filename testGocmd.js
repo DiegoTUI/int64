@@ -18,7 +18,7 @@ const performSumOperation = (n1, n2, expected) => new Promise(resolve => {
 
 const performDivOperation = (n1, n2, expected) => new Promise(resolve => {
     exec('./gocmd' + ' -n1 ' + n1 + ' -n2 ' + n2 + ' -op div', (error, result) => {;
-        assert(Math.abs(parseFloat(result) - expected) < numbers.TOLERANCE, 'Failed div: ' + n1 + ' + ' + n2);
+        assert.equal(result, expected, 'Failed div: ' + n1 + ' / ' + n2);
         return resolve();
     });
 });
@@ -29,9 +29,9 @@ const main = async(function() {
         await(performSumOperation(numbers.number1, numbers.number3, numbers.number1plus3));
         await(performSumOperation(numbers.number1, numbers.number4, numbers.number1plus4));
 
-        await(performDivOperation(numbers.number1, numbers.number2, numbers.number1div2));
-        await(performDivOperation(numbers.number1, numbers.number3, numbers.number1div3));
-        await(performDivOperation(numbers.number1, numbers.number4, numbers.number1div4));
+        await(performDivOperation(numbers.number1, numbers.number5, numbers.number1div5));
+        await(performDivOperation(numbers.number1, numbers.number6, numbers.number1div6));
+        await(performDivOperation(numbers.number1, numbers.number7, numbers.number1div7));
     }
 });
 

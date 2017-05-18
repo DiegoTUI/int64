@@ -20,9 +20,9 @@ func process(cmd *json.Json) (response *json.Json) {
 
 	switch op {
 	case "div":
-		m["response"] = strconv.FormatFloat(float64(n1)/float64(n2), 'f', -1, 64)
+		m["response"] = strconv.FormatInt(n1/n2, 10)
 	default:
-		m["response"] = strconv.FormatInt(n1+n2, 10) //(string)(n1 + n2)
+		m["response"] = strconv.FormatInt(n1+n2, 10)
 	}
 
 	return

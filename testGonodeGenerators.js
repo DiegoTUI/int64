@@ -28,7 +28,7 @@ const performSumOperation = (n1, n2, expected) =>
 
 const performDivOperation = (n1, n2, expected) =>
     go.execute({n1: n1, n2: n2, op: 'div'}, function(result, response) {;
-        assert(Math.abs(response.response - expected) < numbers.TOLERANCE, 'Failed div: ' + n1 + ' + ' + n2);
+        assert.equal(response.response, expected, 'Failed div: ' + n1 + ' / ' + n2);
         return it.next();
     });
 
@@ -39,9 +39,9 @@ const main = function*() {
         yield performSumOperation(numbers.number1, numbers.number3, numbers.number1plus3);
         yield performSumOperation(numbers.number1, numbers.number4, numbers.number1plus4);
 
-        yield performDivOperation(numbers.number1, numbers.number2, numbers.number1div2);
-        yield performDivOperation(numbers.number1, numbers.number3, numbers.number1div3);
-        yield performDivOperation(numbers.number1, numbers.number4, numbers.number1div4);
+        yield performDivOperation(numbers.number1, numbers.number5, numbers.number1div5);
+        yield performDivOperation(numbers.number1, numbers.number6, numbers.number1div6);
+        yield performDivOperation(numbers.number1, numbers.number7, numbers.number1div7);
     }
 
     console.timeEnd('gonode lib');
