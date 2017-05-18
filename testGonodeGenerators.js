@@ -34,6 +34,7 @@ const performDivOperation = (n1, n2, expected) =>
 
 const main = function*() {
     yield initGo()
+    console.time('gonode lib');
     for(let i = 0; i < numbers.NUM_ITERATIONS; i++) {
         yield performSumOperation(numbers.number1, numbers.number2, numbers.number1plus2);
         yield performSumOperation(numbers.number1, numbers.number3, numbers.number1plus3);
@@ -49,6 +50,5 @@ const main = function*() {
 };
 
 let it = main();
-console.time('gonode lib');
 it.next();
 
