@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const assert = require('assert');
-const buf = fs.readFileSync('./addTwoInt64.wasm');
+const buf = fs.readFileSync('./int64.wasm');
 const Int64 = require("int64-buffer").Int64LE
 const numbers = require('./numbers');
 
