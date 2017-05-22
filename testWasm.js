@@ -68,9 +68,9 @@ WebAssembly.compile(new Uint8Array(buf))
             performSumOperation(n1Int64, n3Int64, numbers.number1plus3);
             performSumOperation(n1Int64, n4Int64, numbers.number1plus4);
 
-            performDivOperation(n1Int64, n5Int64, numbers.number1div5);
-            performDivOperation(n1Int64, n6Int64, numbers.number1div6);
-            performDivOperation(n1Int64, n7Int64, numbers.number1div7);
+            //performDivOperation(n1Int64, n5Int64, numbers.number1div5);
+            //performDivOperation(n1Int64, n6Int64, numbers.number1div6);
+            //performDivOperation(n1Int64, n7Int64, numbers.number1div7);
         }
         console.timeEnd('testWasp');
 
