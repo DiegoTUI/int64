@@ -6,14 +6,16 @@ const Int64Buffer = require("int64-buffer").Int64LE;
 // constructor
 const Int64 = function(numericString) {
     if (!numericString) return;
-    // represent the number as a float with exponent 10
+    // represent the number as a float with exponent 4
     this.sign = numericString.charCodeAt(0) === 45 ? (numericString = numericString.slice(1), -1) : 1;
     // pad with zeroes
-    numericString = '00000000000'.substring(0, 11 - numericString.length) + numericString;
+    numericString = '00000'.substring(0, 5 - numericString.length) + numericString;
     // produce float
-    this.mantissaInt = numericString.slice(0, numericString.length - 10);
-    this.mantissaDec = numericString.slice(numericString.length - 10);
+    this.mantissaInt = numericString.slice(0, numericString.length - 4);
+    this.mantissaDec = numericString.slice(numericString.length - 4);
+    this.mantissaDecFloat= parseFloat((this.sign === 1 ? '' : '-') + '0.' + this.mantissaDec);
     this.mantissaIntNumber = parseInt(this.mantissaInt, 10);
+    this.mantissaIntNumberSigned = parseInt((this.sign === 1 ? '' : '-') + this.mantissaInt, 10);
     this.mantissaDecNumber = parseInt(this.mantissaDec, 10);
     this.mantissaDecNumberSub = parseInt('1' + this.mantissaDec, 10);
 };
@@ -30,7 +32,7 @@ Int64.prototype = {
             let carry = 0;
             const sumDec = this.mantissaDecNumber + anotherInt64.mantissaDecNumber;
             let sumDecString = sumDec.toString();
-            if (sumDecString.length > 10) {
+            if (sumDecString.length > 4) {
                 carry = 1;
                 sumDecString = sumDecString.slice(1);
             }
@@ -51,12 +53,18 @@ Int64.prototype = {
                 }
             }
             let subDecString = subDec.toString();
-            subDecString = '00000000000'.substring(0, 10 - subDecString.length) + subDecString;
+            subDecString = '00000'.substring(0, 4 - subDecString.length) + subDecString;
 
             const subInt = Math.abs(pos.mantissaIntNumber - neg.mantissaIntNumber - borrow);
 
             return new Int64((newSign === -1 ? '-' : '') + subInt.toString() + subDecString);            
         }
+    },
+
+    plusFloat: function(anotherInt64) {
+        let sumDecIntDec = (this.mantissaDecFloat + anotherInt64.mantissaDecFloat).toFixed(4).toString().split('.');
+        const sumInt = this.mantissaIntNumberSigned + anotherInt64.mantissaIntNumberSigned + parseInt(sumDecIntDec[0]);
+        return new Int64(sumInt.toString() + sumDecIntDec[1]);
     },
 
     absIsHigherThan: function(anotherInt64) {
