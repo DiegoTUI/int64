@@ -25,10 +25,6 @@ for (let i = 0; i < numbers.NUM_ITERATIONS; i++) {
     assert.equal(n1.plusBits(n2).toString(), numbers.number1plus2, 'n1 + n2 failed');
     assert.equal(n1.plusBits(n3).toString(), numbers.number1plus3, 'n1 + n3 failed');
     assert.equal(n1.plusBits(n4).toString(), numbers.number1plus4, 'n1 + n4 failed');
-    
-    //assert.equal(n1.dividedBy(n5).floor().toString(), numbers.number1div5, 'n1 / n5 failed');
-    //assert.equal(n1.dividedBy(n6).floor().toString(), numbers.number1div6, 'n1 / n6 failed');
-    //assert.equal(n1.dividedBy(n7).floor().toString(), numbers.number1div7, 'n1 / n7 failed');
 }
 console.timeEnd('own int64 lib bits');
 
@@ -38,9 +34,5 @@ for (let i = 0; i < numbers.NUM_ITERATIONS; i++) {
     assert.equal(n1.plus(n2).toString(), numbers.number1plus2, 'n1 + n2 failed');
     assert.equal(n1.plus(n3).toString(), numbers.number1plus3, 'n1 + n3 failed');
     assert.equal(n1.plus(n4).toString(), numbers.number1plus4, 'n1 + n4 failed');
-    
-    //assert.equal(n1.dividedBy(n5).floor().toString(), numbers.number1div5, 'n1 / n5 failed');
-    //assert.equal(n1.dividedBy(n6).floor().toString(), numbers.number1div6, 'n1 / n6 failed');
-    //assert.equal(n1.dividedBy(n7).floor().toString(), numbers.number1div7, 'n1 / n7 failed');
 }
 console.timeEnd('own int64 lib bytes');

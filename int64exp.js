@@ -27,7 +27,6 @@ Int64.prototype = {
     },
 
     plus: function(anotherInt64) {
-
         if (this.sign === anotherInt64.sign) {
             let carry = 0;
             const sumDec = this.mantissaDecNumber + anotherInt64.mantissaDecNumber;
