@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    NUM_ITERATIONS: 100000,
+    NUM_ITERATIONS: 10000000,
     TOLERANCE: 0.000001,
 
     propernumber1: 3652987651456789,
