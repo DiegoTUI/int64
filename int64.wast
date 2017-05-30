@@ -1,5 +1,4 @@
 (module
-  (import "console" "log" (func $log (param i32)))
   (import "js" "mem" (memory 1))
   (func (export "addTwo")
     (local $first i64)
